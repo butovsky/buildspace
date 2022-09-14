@@ -2,10 +2,9 @@ import { useMetaMask } from "metamask-react";
 import { useEffect, useState } from "react";
 import { Button } from "../../../beacon/button";
 import { capitalCase } from "change-case";
-import networks from "../../../utils/networks";
 
 export const MetaMask: React.FC = () => {
-    const { status, connect, account, chainId, switchChain, ethereum } = useMetaMask();
+    const { status, connect, account, ethereum } = useMetaMask();
     const [buttonText, setButtonText] = useState('Connect');
 
     const handleConnect = async () => {
@@ -15,23 +14,15 @@ export const MetaMask: React.FC = () => {
             switch (status) {
                 case "connected":
                     setButtonText(account);
-                    await handleChain();
                     return;
                 case "notConnected":
                     await connect();
-                    await handleChain();
                     return;
                 default:
                     setButtonText(capitalCase(status));
                     return
             };
         }   
-    }
-
-    const handleChain = async() => {
-        if (chainId != networks.mumbai) {
-            await switchChain(networks.mumbai);
-        };
     }
     
     useEffect(() => {
@@ -40,7 +31,7 @@ export const MetaMask: React.FC = () => {
         } else {
             setButtonText("Connect")
         }
-    }, [status, account, chainId])
+    }, [status, account])
 
   return (
     <Button
