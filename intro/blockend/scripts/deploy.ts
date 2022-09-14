@@ -1,13 +1,15 @@
 import * as hre from 'hardhat'
 
 async function main() {
-  const [owner, waver] = await hre.ethers.getSigners();
+  const [owner /*, waver */] = await hre.ethers.getSigners();
   const WavePortal = await hre.ethers.getContractFactory("WavePortal");
   const wave = await WavePortal.deploy();
   await wave.deployed();
 
   console.log(`WavePortal deployed to ${ wave.address }`);
   console.log(`WavePortal deployed by ${ owner.address }`)
+  
+  /*
   console.log(`Total waves count: ${ await wave.totalWaves() }`)
 
   const waveWithWaver = wave.connect(waver);
@@ -19,6 +21,7 @@ async function main() {
 
   const ownerWaves = await wave.myWaves();
   console.log(`Your waves: ${ ownerWaves.map(wave => `${wave.message} from ${wave.from}`) }`);
+  */
 
   wave.on("UserWaved", (from, to) => {
     console.log(`${ from } has waved to ${ to }!`)

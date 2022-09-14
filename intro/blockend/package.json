@@ -7,13 +7,15 @@
     "node": "npx hardhat node",
     "compile": "npx hardhat compile && npx hardhat typechain",
     "test": "npx hardhat test",
-    "deploy": "npx hardhat run --network localhost",
+    "deploy:localhost": "npx hardhat run --network localhost",
+    "deploy:mumbai": "npx hardhat run --network mumbai",
     "verify": "npx hardhat verify"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@openzeppelin/contracts": "^4.7.3",
+    "dotenv": "^16.0.2",
     "hardhat": "^2.11.1"
   },
   "devDependencies": {
