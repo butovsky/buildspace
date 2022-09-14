@@ -8,7 +8,7 @@ export const MetaMasked: React.FC<MetaMaskedProps> = (props) => {
             {props.account
                 ? (props.chainId == networks.mumbai) ? props.children
                 : <Text className="text-3xl">Please change your network to Mumbai testnet!</Text>
-                : <Text className="text-3xl">Please connect you account with MetaMask!</Text>
+                : <Text className="text-3xl">Please connect your account with MetaMask!</Text>
             }
         </div>
     )
