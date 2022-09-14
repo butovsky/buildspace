@@ -10,7 +10,7 @@ export const MetaMask: React.FC = () => {
 
     const handleConnect = async () => {
         if (!ethereum) {
-            setButtonText("Please enable metamask")
+            setButtonText("No MetaMask 😔")
         } else {
             switch (status) {
                 case "connected":
