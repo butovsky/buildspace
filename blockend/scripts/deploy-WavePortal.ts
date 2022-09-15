@@ -21,12 +21,12 @@ async function main() {
 
   const ownerWaves = await wave.myWaves();
   console.log(`Your waves: ${ ownerWaves.map(wave => `${wave.message} from ${wave.from}`) }`);
-  */
 
   wave.on("UserWaved", (from, to) => {
     console.log(`${ from } has waved to ${ to }!`)
   })
 
+  */
 
 }
 

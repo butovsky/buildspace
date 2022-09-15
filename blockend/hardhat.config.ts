@@ -1,5 +1,7 @@
 import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
+import "@nomiclabs/hardhat-ethers";
+
 import { ENV } from "./env.config";
 
 const config: HardhatUserConfig = {
@@ -9,6 +11,9 @@ const config: HardhatUserConfig = {
       url: ENV('MUMBAI_API_URL'),
       accounts: [ENV('OWNER_PRIVATE_KEY')]
     }
+  },
+  etherscan: {
+    apiKey: ENV('POLYGONSCAN_API_KEY')
   }
 };
 
