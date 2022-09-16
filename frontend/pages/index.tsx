@@ -9,7 +9,6 @@ import { NFTModal } from '../src/components/Modal/NFT';
 
 const Home: NextPage = () => {
   const { account, chainId } = useMetaMask();
-  const [ isOpen, setOpen ] = useState(false);
 
   return (
     <div className='h-full'>
@@ -25,8 +24,6 @@ const Home: NextPage = () => {
             </Link>
           </div>
         </MetaMasked>
-        <Button onClick={() => setOpen(true)}>Open Modal</Button>
-        <NFTModal isOpen={isOpen} close={() => setOpen(false)} nft=''/>
       </main>
     </div>
   )

@@ -1,5 +1,5 @@
 import { ButtonProps } from "./types";
-import { TextBlock } from "../text";
+import { TextBlock } from "../text/block";
 
 export const Button: React.FC<ButtonProps> = (props) => {
     return (

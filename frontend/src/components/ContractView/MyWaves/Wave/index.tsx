@@ -1,7 +1,8 @@
 import Link from "next/link";
 import React from "react";
 import { Card } from "../../../../beacon/card";
-import { Text, TextBlock } from "../../../../beacon/text";
+import { Text } from "../../../../beacon/text";
+import { TextBlock } from "../../../../beacon/text/block";
 import { BasicProps } from "../../../../beacon/types";
 
 type WaveProps = BasicProps & {
