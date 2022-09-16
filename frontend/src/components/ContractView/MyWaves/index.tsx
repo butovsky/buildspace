@@ -12,7 +12,7 @@ import Link from 'next/link';
 // there can be a room for a flexible component for not only my waves, but for any users
 
 export const MyWaves: React.FC<BasicProps> = (props) => {
-  const { ethereum } = useMetaMask();
+  const { ethereum, account } = useMetaMask();
   const [waves, setWaves] = useState<WavePortal.WaveStructOutput[]>([])
 
   const fetchWaves = async() => {
@@ -25,7 +25,7 @@ export const MyWaves: React.FC<BasicProps> = (props) => {
 
   useEffect(() => {
     fetchWaves()
-  }, [])
+  }, [account])
 
   return ethereum && (
     <div className={props.className}>
