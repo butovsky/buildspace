@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import { useMetaMask } from 'metamask-react'
 import { Text } from '../../src/beacon/text';
-import { SendWave } from '../../src/components/SendWave';
+import { SendWave } from '../../src/components/ContractWrite/SendWave';
 import { MetaMasked } from '../../src/beacon/metamasked';
 
 const Send: NextPage = () => {

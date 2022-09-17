@@ -1,8 +1,7 @@
 import type { NextPage } from 'next';
 import { useMetaMask } from 'metamask-react'
 import { Text } from '../../src/beacon/text';
-import { MyWaves } from '../../src/components/ContractView/MyWaves';
-import networks from '../../src/utils/networks';
+import { MyWaves } from '../../src/components/ContractRead/MyWaves';
 import { MetaMasked } from '../../src/beacon/metamasked';
 
 const My: NextPage = () => {

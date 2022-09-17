@@ -1,13 +1,13 @@
 import { useMetaMask } from "metamask-react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { Button } from "../../beacon/button";
-import { Input } from "../../beacon/input";
-import { BasicProps } from "../../beacon/types";
-import { getContract } from "../../utils/getContract";
-import { Wave } from "../ContractView/MyWaves/Wave";
-import { abi } from '../../../contracts/abi/WavePortal.json'
-import { WavePortal } from "../../../contracts/types";
+import { Button } from "../../../beacon/button";
+import { Input } from "../../../beacon/input";
+import { BasicProps } from "../../../beacon/types";
+import { getContract } from "../../../utils/getContract";
+import { Wave } from "../../ContractRead/MyWaves/Wave";
+import { abi } from '../../../../contracts/abi/WavePortal.json'
+import { WavePortal } from "../../../../contracts/types";
 
 type SendProps = BasicProps & {
     user: string;
