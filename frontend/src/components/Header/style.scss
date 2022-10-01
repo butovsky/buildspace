@@ -1,0 +1,13 @@
+.header {
+    @apply fixed w-full shadow-md;
+
+    background: linear-gradient(to right, rgb(30 58 138) 0%, rgb(21 94 117) 100%);
+
+    .content {
+        @apply flex justify-between items-center;
+
+        .menu {
+            @apply flex flex-row items-center;
+        }
+    }
+}

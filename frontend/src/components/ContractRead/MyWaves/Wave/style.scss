@@ -1,0 +1,7 @@
+.wave {
+    @apply max-w-xs h-32 overflow-y-scroll;
+
+    .content {
+        @apply text-white mb-2 overflow-x-hidden text-ellipsis whitespace-nowrap font-bold tracking-tight text-2xl;
+    }
+}

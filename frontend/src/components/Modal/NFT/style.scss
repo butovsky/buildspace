@@ -1,0 +1,11 @@
+.nft-modal {
+    @apply flex flex-col items-center justify-center gap-y-5;
+
+    .content {
+        @apply flex flex-row gap-x-5;
+
+        .info {
+            @apply max-w-sm flex flex-col items-center justify-center gap-y-5;
+        }
+    }
+}

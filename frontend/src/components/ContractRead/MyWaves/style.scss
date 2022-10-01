@@ -1,0 +1,7 @@
+.my-waves {
+    @apply flex flex-wrap gap-5 justify-center;
+
+    .content {
+        @apply flex flex-col gap-y-5 items-center;
+    }
+}

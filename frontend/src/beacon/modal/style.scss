@@ -1,0 +1,33 @@
+.modal {
+    @apply flex fixed inset-0 items-center justify-center backdrop-blur-md transition ease-in-out duration-200;
+
+    background-color: rgba(0, 0, 0, 0.2);
+
+    &__opening, &__closing {
+        @extend .modal;
+        background-color: transparent;
+    }
+
+    .content {
+        transform: scale(1);
+
+        @apply flex flex-col gap-y-5 transition ease-in-out duration-100;
+
+        &__opening, &__closing {
+            @extend .content;
+            transform: scale(0);
+        }
+    }
+}
+
+.close-button {
+    @apply flex justify-end w-full;
+
+    .cross {
+        @apply transition ease-in-out duration-100;
+    }
+
+    .cross:hover {
+        @apply scale-110 cursor-pointer;
+    }
+}

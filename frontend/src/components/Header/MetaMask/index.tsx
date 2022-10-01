@@ -2,6 +2,7 @@ import { useMetaMask } from "metamask-react";
 import { useEffect, useState } from "react";
 import { Button } from "../../../beacon/button";
 import { capitalCase } from "change-case";
+import { Text } from "../../../beacon/text";
 
 export const MetaMask: React.FC = () => {
     const { status, connect, account, ethereum } = useMetaMask();
@@ -37,6 +38,6 @@ export const MetaMask: React.FC = () => {
     <Button
         className='m-2'
         onClick={handleConnect}
-    >{buttonText}</Button>
+    ><Text className="overflow-hidden text-ellipsis">{buttonText}</Text></Button>
   );
 }

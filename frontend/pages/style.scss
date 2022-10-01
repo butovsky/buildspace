@@ -1,0 +1,7 @@
+.home {
+    @apply flex flex-col justify-center items-center gap-y-5 h-full;
+
+    .menu {
+        @apply flex flex-row gap-x-3;
+    }
+}

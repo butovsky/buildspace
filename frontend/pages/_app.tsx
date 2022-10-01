@@ -1,14 +1,15 @@
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import { MetaMaskProvider } from "metamask-react";
-import '../styles/globals.css'
+import './app.scss';
+
 import { Header } from '../src/components/Header';
 import { AlchemyProvider } from '../src/contexts/alchemy';
 import { ButovskyNFTProvider } from '../src/contexts/butovskyNFT';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <div className='h-screen flex flex-col bg-gradient-to-br from-blue-900 to-cyan-600'>
+    <div className='app'>
       <AlchemyProvider>
         <MetaMaskProvider>
           <ButovskyNFTProvider>

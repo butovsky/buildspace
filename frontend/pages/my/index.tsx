@@ -8,14 +8,12 @@ const My: NextPage = () => {
     const { account, chainId } = useMetaMask();
   
     return (
-        <div className='h-full'>
-          <main className="flex flex-col justify-center items-center h-full gap-y-10">
-          <Text className="font-bold text-5xl">Your Waves</Text>
-            <MetaMasked account={account} chainId={chainId}>
-              <MyWaves/>
-            </MetaMasked>
-          </main>
-        </div>
+      <main className="my">
+      <Text className="font-bold text-5xl">Your Waves</Text>
+        <MetaMasked account={account} chainId={chainId}>
+          <MyWaves/>
+        </MetaMasked>
+      </main>
     )
   }
   

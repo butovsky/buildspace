@@ -34,14 +34,14 @@ export const SendWave: React.FC<SendProps> = (props) => {
     }
 
     return (
-        <div className={`flex flex-col gap-y-3 items-center ${props.className}`}>
-            <div className="flex flex-row gap-x-5 items-center">
-                <div className="flex flex-col gap-y-2 items-end">
+        <div className={`send-wave ${props.className}`}>
+            <div className="content">
+                <div className="form">
                     <Input className='w-108 text-center' name='address' value={address} onChange={(e) => setAddress(e.target.value)} placeholder='Address of a Wave receiver' />
                     <Input className='w-108 text-center' name='message' value={message} onChange={(e) => setMessage(e.target.value)} placeholder='Message you want to send' />
                     <Button onClick={sendWaveToContract}>{'Submit'}</Button>
                 </div>
-                <div className="flex flex-col items-center gap-y-3">
+                <div className="demo">
                     <Wave from={props.user} message={message} />
                 </div>
             </div>

@@ -28,17 +28,15 @@ export const MyWaves: React.FC<BasicProps> = (props) => {
   }, [account])
 
   return ethereum && (
-    <div className={props.className}>
-      <div className='flex flex-wrap gap-5 justify-center'>
-        { waves.length ? waves.map(wave => (
-          <Wave key={waves.indexOf(wave)} from={wave.from} message={wave.message}/>
-        )) : <div className='flex flex-col gap-y-5 items-center'>
-          <Text className='text-3xl'>You don&apos;t have any Waves yet!</Text>
-          <Link href='/send'>
-                <Button>{'Send some!'}</Button>
-          </Link>
-        </div>}
-      </div>
+    <div className={`${props.className} my-waves`}>
+      { waves.length ? waves.map(wave => (
+        <Wave key={waves.indexOf(wave)} from={wave.from} message={wave.message}/>
+      )) : <div className='content'>
+        <Text className='text-3xl'>You don&apos;t have any Waves yet!</Text>
+        <Link href='/send'>
+              <Button>{'Send some!'}</Button>
+        </Link>
+      </div>}
     </div>
   );
 }

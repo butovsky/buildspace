@@ -1,0 +1,7 @@
+.card {
+    @apply transition ease-in-out block p-4 bg-transparent rounded-lg border border-slate-400 shadow-md duration-300
+}
+
+.card:hover {
+    @apply border-slate-200 scale-105;
+}
