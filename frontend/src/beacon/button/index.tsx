@@ -9,7 +9,8 @@ export const Button: React.FC<ButtonProps> = (props) => {
             onClick={props.onClick}
             disabled={props.isLoading}
         >
-            { props.children }
+            { props.isLoading && <div className={styles.spinner}/> }
+            { props.isLoading ? props.loadingText ?? props.children : props.children }
         </button>
     )
 }

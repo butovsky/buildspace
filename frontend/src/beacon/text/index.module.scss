@@ -1,4 +1,6 @@
 .container {
+    overflow: hidden;
+    text-overflow: ellipsis;
     align-items: center;
     color: white;
 }

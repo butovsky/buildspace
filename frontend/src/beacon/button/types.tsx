@@ -5,4 +5,5 @@ export type ButtonProps = TextContainedProps & {
     height?: number;
     width?: number;
     isLoading?: boolean;
+    loadingText?: string;
 } 
