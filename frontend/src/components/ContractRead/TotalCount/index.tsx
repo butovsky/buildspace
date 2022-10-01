@@ -25,7 +25,5 @@ export const TotalCount: React.FC<BasicProps> = (props) => {
   if (ethereum) {
 
   }
-  return ethereum && (<div className={props.className}>
-    <Button className='m-2'>{`Total waves: ${count}`}</Button>
-  </div>)
+  return ethereum && (<Button className={props.className}>{`Total waves: ${count}`}</Button>)
 }

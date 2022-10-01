@@ -1,9 +1,9 @@
-.wave {
+.container {
     max-width: 320px;
     height: 128px;
     overflow-y: scroll;
 
-    .content {
+    .from {
         color: white;
         margin-bottom: 8px;
         overflow-x: hidden;
@@ -13,5 +13,14 @@
         font-weight: 700;
         font-size: 20px;
         line-height: 28px;
+    }
+
+    .icon {
+        margin-right: 8px;
+    }
+
+    .message {
+        font-weight: 400;
+        word-break: break-all;
     }
 }

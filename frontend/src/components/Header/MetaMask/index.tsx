@@ -4,6 +4,8 @@ import { Button } from "../../../beacon/button";
 import { capitalCase } from "change-case";
 import { Text } from "../../../beacon/text";
 
+import styles from './index.module.scss';
+
 export const MetaMask: React.FC = () => {
     const { status, connect, account, ethereum } = useMetaMask();
     const [buttonText, setButtonText] = useState('Connect');
@@ -36,8 +38,8 @@ export const MetaMask: React.FC = () => {
 
   return (
     <Button
-        className='m-2'
+        className={styles.container}
         onClick={handleConnect}
-    ><Text className="overflow-hidden text-ellipsis">{buttonText}</Text></Button>
+    ><Text className={styles.text}>{buttonText}</Text></Button>
   );
 }

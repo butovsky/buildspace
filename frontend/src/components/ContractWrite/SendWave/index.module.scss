@@ -1,4 +1,4 @@
-.send-wave {
+.container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -15,10 +15,15 @@
             flex-direction: column;
             align-items: flex-end;
             gap: 8px;
+
+            .input {
+                width: 432px;
+                text-align: center;
+            }
         }
 
         .demo {
-            @extend .send-wave
+            @extend .container;
         }
     }
 }

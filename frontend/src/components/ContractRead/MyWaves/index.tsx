@@ -9,7 +9,9 @@ import { Wave } from './Wave';
 import { Text } from '../../../beacon/text';
 import Link from 'next/link';
 
-// there can be a room for a flexible component for not only my waves, but for any users
+import styles from './index.module.scss';
+
+// there can be a room for a flexible component for not only my waves, but for any user's
 
 export const MyWaves: React.FC<BasicProps> = (props) => {
   const { ethereum, account } = useMetaMask();
@@ -28,11 +30,11 @@ export const MyWaves: React.FC<BasicProps> = (props) => {
   }, [account])
 
   return ethereum && (
-    <div className={`${props.className} my-waves`}>
+    <div className={`${styles.container} ${props.className}`}>
       { waves.length ? waves.map(wave => (
         <Wave key={waves.indexOf(wave)} from={wave.from} message={wave.message}/>
-      )) : <div className='content'>
-        <Text className='text-3xl'>You don&apos;t have any Waves yet!</Text>
+      )) : <div className={styles.missing}>
+        <Text className={styles.title}>You don&apos;t have any Waves yet!</Text>
         <Link href='/send'>
               <Button>{'Send some!'}</Button>
         </Link>

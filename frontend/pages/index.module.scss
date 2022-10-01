@@ -1,10 +1,18 @@
-.home {
+.container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 20px;
     height: 100%;
+
+    //todo: make mixins for different sizes and purposes
+
+    .title {
+        font-weight: 700;
+        font-size: 48px;
+        line-height: 1;
+    }
 
     .menu {
         display: flex;

@@ -1,8 +1,10 @@
 import { TextProps } from "./types";
 
+import styles from './index.module.scss'
+
 export const Text: React.FC<TextProps> = (props) => {
     return (
-        <span className={`${props.className} text`}>
+        <span className={`${styles.container} ${props.className}`}>
             {props.children}
         </span>
     )

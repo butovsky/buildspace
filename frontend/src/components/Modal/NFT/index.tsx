@@ -4,6 +4,8 @@ import { BasicModalProps } from "../../../beacon/modal/types"
 import { Text } from "../../../beacon/text"
 import { useButovskyNFT } from "../../../contexts/butovskyNFT"
 
+import styles from './index.module.scss';
+
 // todo: exceptions for broken NFTs
 
 export const NFTModal: React.FC<BasicModalProps> = (props) => {
@@ -12,25 +14,28 @@ export const NFTModal: React.FC<BasicModalProps> = (props) => {
     !hasNFT && props.close();
 
     return (
-        <div className={props.className}>
-            <Modal isOpen={props.isOpen} close={() => props.close()}>
-                <Card className="bg-black/30">
-                    <div className="nft-modal">
-                        <div className="content">
-                            <img style={{ height: 300 }} src={NFT?.rawMetadata?.image}/>
-                            <div className="info">
-                                <div className="text-xl">
-                                    <Text className="font-bold">{NFT?.rawMetadata?.name}</Text> <a href="https://google.com"><Text>🌐</Text></a>
-                                </div>
-                                <div className="text-white max-h-52 overflow-y-scroll font-semibold">
-                                    {NFT?.rawMetadata?.description}
-                                </div>
-                            </div>
+        <Modal className={props.className} isOpen={props.isOpen} close={() => props.close()}>
+            <Card className={styles.container}>
+                <div className={styles.content}>
+                    <img style={{ height: 300 }} src={NFT?.rawMetadata?.image}/>
+                    <div className={styles.info}>
+                        <div className={styles.title}>
+                            <Text>
+                                {NFT?.rawMetadata?.name}
+                            </Text>
+                            {' '}
+                            <a href="https://google.com">
+                                <Text>🌐</Text>
+                            </a>
                         </div>
-                        <div className="flex flex-row gap-x-5"/>
+                        <div className={styles.desc}>
+                            <Text className={styles.text}>
+                                {NFT?.rawMetadata?.description}
+                            </Text>
+                        </div>
                     </div>
-                </Card>
-            </Modal>
-        </div>
+                </div>
+            </Card>
+        </Modal>
     )
 }

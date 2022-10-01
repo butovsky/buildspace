@@ -1,4 +1,4 @@
-.inp {
+.container {
     border: 1px solid;
     border-color: rgb(148 163 184);
     border-radius: 12px;
@@ -8,11 +8,11 @@
     transition: all 0.3s ease-in-out;
 }
 
-.inp:hover {
+.container:hover {
     border-color: rgb(203 213 225);
 }
 
-.inp:focus {
+.container:focus {
     border-color: rgb(226 232 240);
     outline: none;
 }

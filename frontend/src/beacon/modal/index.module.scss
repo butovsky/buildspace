@@ -1,4 +1,4 @@
-.modal {
+.container {
     display: flex;
     position: fixed;
     inset: 0;
@@ -10,7 +10,7 @@
     transition: all 0.3s ease-in-out;
 
     &__opening, &__closing {
-        @extend .modal;
+        @extend .container;
         background-color: transparent;
     }
 
@@ -27,19 +27,19 @@
             transform: scale(0);
         }
     }
-}
 
-.close-button {
-    display: flex;
-    justify-content: end;
-    width: 100%;
-
-    .cross {
-        transition: all 0.1s ease-in-out;
-    }
-
-    .cross:hover {
-        transform: scale(1.1);
-        cursor: pointer;
+    .close_btn {
+        display: flex;
+        justify-content: end;
+        width: 100%;
+    
+        .cross {
+            transition: all 0.1s ease-in-out;
+        }
+    
+        .cross:hover {
+            transform: scale(1.1);
+            cursor: pointer;
+        }
     }
 }

@@ -1,7 +1,8 @@
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import { MetaMaskProvider } from "metamask-react";
-import './app.scss';
+
+import './app.scss'
 
 import { Header } from '../src/components/Header';
 import { AlchemyProvider } from '../src/contexts/alchemy';

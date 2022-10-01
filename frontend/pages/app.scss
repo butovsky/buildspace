@@ -1,19 +1,28 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+html { // from Tailwind: https://github.com/tailwindlabs/tailwindcss
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
 
-@import './style.scss';
-@import './send/style.scss';
-@import './my/style.scss';
-@import '../src/beacon/style.scss';
+body {
+    margin: 0;
+}
 
-@import '../src/components/Header/style.scss';
-@import '../src/components/Modal/NFT/style.scss';
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
 
-@import '../src/components/ContractWrite/SendWave/style.scss';
 
-@import '../src/components/ContractRead/MyWaves/style.scss';
-@import '../src/components/ContractRead/MyWaves/Wave/style.scss';
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #9ca3af
+}
+
 
 .app {
     height: 100vh;
