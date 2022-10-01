@@ -1,13 +1,18 @@
 .header {
-    @apply fixed w-full shadow-md;
-
+    position: fixed;
+    width: 100%;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
     background: linear-gradient(to right, rgb(30 58 138) 0%, rgb(21 94 117) 100%);
 
     .content {
-        @apply flex justify-between items-center;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
 
         .menu {
-            @apply flex flex-row items-center;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
         }
     }
 }

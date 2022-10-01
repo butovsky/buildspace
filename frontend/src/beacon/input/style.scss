@@ -1,12 +1,18 @@
 .inp {
-    @apply transition ease-in-out duration-300 p-2 text-white bg-transparent border border-slate-400 rounded-md;
+    border: 1px solid;
+    border-color: rgb(148 163 184);
+    border-radius: 12px;
+    padding: 8px;
+    background: transparent;
+    color: white;
+    transition: all 0.3s ease-in-out;
 }
 
 .inp:hover {
-    @apply border-slate-300;
+    border-color: rgb(203 213 225);
 }
 
 .inp:focus {
-    @apply border-slate-200;
+    border-color: rgb(226 232 240);
     outline: none;
 }

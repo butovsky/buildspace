@@ -1,11 +1,22 @@
 .nft-modal {
-    @apply flex flex-col items-center justify-center gap-y-5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
 
     .content {
-        @apply flex flex-row gap-x-5;
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
 
         .info {
-            @apply max-w-sm flex flex-col items-center justify-center gap-y-5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            max-width: 320px;
         }
     }
 }

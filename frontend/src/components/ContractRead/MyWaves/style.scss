@@ -1,7 +1,13 @@
 .my-waves {
-    @apply flex flex-wrap gap-5 justify-center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
 
     .content {
-        @apply flex flex-col gap-y-5 items-center;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
     }
 }

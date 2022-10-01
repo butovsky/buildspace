@@ -1,7 +1,16 @@
 .card {
-    @apply transition ease-in-out block p-4 bg-transparent rounded-lg border border-slate-400 shadow-md duration-300
+    display: block;
+    border: 1px solid;
+    border-color: rgb(148 163 184);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    border-radius: 12px;
+    padding: 16px;
+    background: transparent;
+
+    transition: all 0.3s ease-in-out;
 }
 
 .card:hover {
-    @apply border-slate-200 scale-105;
+    transform: scale(1.05);
+    border-color: rgb(226 232 240);
 }

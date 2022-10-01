@@ -1,15 +1,24 @@
 .send-wave {
-    @apply flex flex-col gap-y-3 items-center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
 
     .content {
-        @apply flex flex-row gap-x-5 items-center;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 20px;
 
         .form {
-            @apply flex flex-col gap-y-2 items-end;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
         }
 
         .demo {
-            @apply flex flex-col items-center gap-y-3;
+            @extend .send-wave
         }
     }
 }
