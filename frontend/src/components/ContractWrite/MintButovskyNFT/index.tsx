@@ -21,10 +21,10 @@ export const MintButovskyNFT: React.FC = () => {
                 setMinting(true);
                 await mintTx.wait();
                 await checkForNFT();
-                setMinting(false);
             } catch (e) {
                 alert(e);
             }
+            setMinting(false);
         }
     }
 
