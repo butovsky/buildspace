@@ -30,7 +30,7 @@ export const Footer: React.FC = () => {
         <div className={styles.container}>
             <div className={styles.links}>
                 {socialMedia.map((icon) => (
-                    <a target="_blank" rel="noopener noreferrer" href={icon.link}>
+                    <a key={`icon-${socialMedia.indexOf(icon)}`} target="_blank" rel="noopener noreferrer" href={icon.link}>
                         <Image className={styles.icon} height={32} width={32} src={icon.img}/>
                     </a>
                 ))}
