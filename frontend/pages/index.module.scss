@@ -1,10 +1,11 @@
 .container {
+    flex: 1 1 auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 20px;
-    height: 100%;
+    padding: 40px;
 
     //todo: make mixins for different sizes and purposes
 

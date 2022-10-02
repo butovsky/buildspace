@@ -7,23 +7,25 @@ import './app.scss'
 import { Header } from '../src/components/Header';
 import { AlchemyProvider } from '../src/contexts/alchemy';
 import { ButovskyNFTProvider } from '../src/contexts/butovskyNFT';
+import { Footer } from '../src/components/Footer';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <div className='app'>
-      <AlchemyProvider>
-        <MetaMaskProvider>
-          <ButovskyNFTProvider>
-            <Head>
-              <title>Buildspace Intro</title>
-              <link rel="icon" href="/favicon.ico" />
-            </Head>
-            <Header/>
-            <Component {...pageProps} />
-          </ButovskyNFTProvider>
-        </MetaMaskProvider>
-      </AlchemyProvider>
-    </div>
+    <AlchemyProvider>
+      <MetaMaskProvider>
+        <ButovskyNFTProvider>
+          <Head>
+            <title>Buildspace Intro</title>
+            <link rel="icon" href="/favicon.ico" />
+          </Head>
+          <div className='app'>
+          <Header/>
+          <Component {...pageProps} />
+          <Footer/>
+          </div>
+        </ButovskyNFTProvider>
+      </MetaMaskProvider>
+    </AlchemyProvider>
   )
 }
 
