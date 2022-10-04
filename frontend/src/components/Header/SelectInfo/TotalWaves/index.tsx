@@ -11,7 +11,7 @@ export const TotalWaves: React.FC<BasicProps> = (props) => {
 
   const fetchCount = async() => {
     if (ethereum) {
-      const waveContract = getContract<WavePortal>({ ethereum, abi, address: '0xbAB57b132CB35E2292A5ea7926314FC647EEc539'})
+      const waveContract = getContract<WavePortal>({ ethereum, abi, address: process.env.NEXT_PUBLIC_WAVES_CONTRACT as string})
       const fetchedCount = await waveContract.totalWaves()
       setCount(fetchedCount.toNumber())
     }

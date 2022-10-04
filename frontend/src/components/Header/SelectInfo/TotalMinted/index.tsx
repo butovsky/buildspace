@@ -12,11 +12,13 @@ export const TotalMinted: React.FC<BasicProps> = (props) => {
 
   const fetchMinted = async() => {
     if (ethereum) {
-      const NFTContract = getContract<ButovskyNFT>({ ethereum, abi, address: '0x4412D5db5703e84693A3004115C0C41eAE8c92fb'})
-      /*
-      const fetchedCount = await NFTContract.totalWaves()
-      setCount(fetchedCount.toNumber())
-      */
+      const NFTContract = getContract<ButovskyNFT>({ ethereum, abi, address: process.env.NEXT_PUBLIC_BUTOVSKY_NFT_CONTRACT as string})
+
+      const fetchedCount = await NFTContract.getTokenCount();
+      setCount(fetchedCount.toNumber());
+
+      const fetchedLimit = await NFTContract.getTokenLimit();
+      setLimit(fetchedLimit.toNumber());
     }
   }
 

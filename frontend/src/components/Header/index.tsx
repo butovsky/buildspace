@@ -23,13 +23,13 @@ export const Header: React.FC = () => {
                     </a>
                 </Link>
                 <div className={styles.menu}>
-                    {account && <MintButovskyNFT/>}
                     {account && hasNFT && 
                         <Select>
                             <TotalMinted/>
                             <TotalWaves/>
                         </Select>
                     }
+                    {account && <MintButovskyNFT/>}
                     <MetaMask/>
                 </div>
             </div>

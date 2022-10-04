@@ -9,30 +9,48 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Base64.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
+import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "hardhat/console.sol";
 
 contract ButovskyNFT is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
     using Strings for uint256;
+    using SafeMath for uint256;
 
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
 
     Counters.Counter private _nonce;
 
+    uint256 private _limit = 100;
+
     string[] firstWords = ['Average', 'Typical', 'Ordinary', 'Extra', 'Legendary', 'Experienced', 'Grown', 'Senior', 'Middle', 'Junior'];
     string[] secondWords = ['Anime', 'Gaming', 'Workout', 'Music', 'Tiktok', 'Movie', 'Coding', 'Meme', 'Cartoon', 'Networking'];
     string[] thirdWords = ['Fan', 'Enjoyer', 'Enthusiast', 'Master', 'Adept', 'Guru', 'Expert', 'Advocate', 'Researcher', 'Hater'];
+    string[] colors = ['black', 'red', 'green', 'blue', 'olive', 'orange', 'purple', 'darkblue', 'maroon', 'magenta'];
 
     event Minted(address to, uint256 tokenId);
     
     constructor() ERC721("Butovsky NFT", "BDT") {
     }
 
+
+    function addLimit(uint256 newLimit) public {
+        _limit = _limit.add(newLimit);
+    }
+
+    function getTokenCount() public view returns (uint256) {
+        return _tokenIds.current();
+    }
+
+    function getTokenLimit() public view returns (uint256) {
+        return _limit;
+    }
+
     function generateSVG() internal returns (string memory) {
         bytes memory svg = abi.encodePacked(
             '<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet" viewBox="0 0 350 350">',
                 '<style>.base { fill: white; font-family: serif; font-size: 14px; }</style>',
-                '<rect width="100%" height="100%" fill="black" />',
+                '<rect width="100%" height="100%" fill="', colors[pseudoRandom(10)], '"/>',
                 '<text x="50%" y="50%" class="base" dominant-baseline="middle" text-anchor="middle">', generateName(),'</text>',
             '</svg>'
         );
@@ -82,7 +100,10 @@ contract ButovskyNFT is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
         public
         onlyOnce
     {
-        uint256 tokenId = _tokenIds.current();
+        uint256 tokenId = getTokenCount();
+
+        require(tokenId <= _limit, 'The limit of minting is achieved!');
+
         string memory json = generateJSON(tokenId);
 
         /* for local development
@@ -106,20 +127,10 @@ contract ButovskyNFT is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
         _tokenIds.increment();
     }
 
+
     function _burn(uint256 tokenId) internal override(ERC721, ERC721URIStorage) {
         super._burn(tokenId);
     }
-
-    /*
-    function _baseURI()
-        internal
-        pure
-        override(ERC721)
-        returns (string memory) 
-    {
-        return "ipfs://";
-    }
-    */
 
     function tokenURI(uint256 tokenId)
         public

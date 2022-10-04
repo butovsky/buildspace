@@ -15,7 +15,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <ButovskyNFTProvider>
         <EventsProvider>
           <Head>
-            <title>Buildspace Intro</title>
+            <title>butovsky_dev</title>
             <link rel="icon" href="/favicon.ico" />
           </Head>
           <div className='app'>

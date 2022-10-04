@@ -23,7 +23,7 @@ export const ButovskyNFTProvider = ({ children }: CustomProviderProps ): JSX.Ele
     const checkForNFT = async() => {
         if (account && chainId == networks.mumbai) {
             const ownersResponse = await alchemy.nft.getNftsForOwner(account, {
-                contractAddresses: ["0x4412D5db5703e84693A3004115C0C41eAE8c92fb"]
+                contractAddresses: [process.env.NEXT_PUBLIC_BUTOVSKY_NFT_CONTRACT as string]
             });
 
             setHasNFT(Boolean(ownersResponse.totalCount))

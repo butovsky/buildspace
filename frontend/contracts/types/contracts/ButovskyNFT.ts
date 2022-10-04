@@ -29,11 +29,14 @@ import type {
 
 export interface ButovskyNFTInterface extends utils.Interface {
   functions: {
+    "addLimit(uint256)": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
     "burn(uint256)": FunctionFragment;
     "checkNotClaimed()": FunctionFragment;
     "getApproved(uint256)": FunctionFragment;
+    "getTokenCount()": FunctionFragment;
+    "getTokenLimit()": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
     "name()": FunctionFragment;
     "owner()": FunctionFragment;
@@ -52,11 +55,14 @@ export interface ButovskyNFTInterface extends utils.Interface {
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "addLimit"
       | "approve"
       | "balanceOf"
       | "burn"
       | "checkNotClaimed"
       | "getApproved"
+      | "getTokenCount"
+      | "getTokenLimit"
       | "isApprovedForAll"
       | "name"
       | "owner"
@@ -73,6 +79,10 @@ export interface ButovskyNFTInterface extends utils.Interface {
       | "transferOwnership"
   ): FunctionFragment;
 
+  encodeFunctionData(
+    functionFragment: "addLimit",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
   encodeFunctionData(
     functionFragment: "approve",
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
@@ -92,6 +102,14 @@ export interface ButovskyNFTInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "getApproved",
     values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getTokenCount",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getTokenLimit",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "isApprovedForAll",
@@ -151,6 +169,7 @@ export interface ButovskyNFTInterface extends utils.Interface {
     values: [PromiseOrValue<string>]
   ): string;
 
+  decodeFunctionResult(functionFragment: "addLimit", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "burn", data: BytesLike): Result;
@@ -160,6 +179,14 @@ export interface ButovskyNFTInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "getApproved",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getTokenCount",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getTokenLimit",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -299,6 +326,11 @@ export interface ButovskyNFT extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    addLimit(
+      newLimit: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     approve(
       to: PromiseOrValue<string>,
       tokenId: PromiseOrValue<BigNumberish>,
@@ -321,6 +353,10 @@ export interface ButovskyNFT extends BaseContract {
       tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[string]>;
+
+    getTokenCount(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    getTokenLimit(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     isApprovedForAll(
       owner: PromiseOrValue<string>,
@@ -391,6 +427,11 @@ export interface ButovskyNFT extends BaseContract {
     ): Promise<ContractTransaction>;
   };
 
+  addLimit(
+    newLimit: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   approve(
     to: PromiseOrValue<string>,
     tokenId: PromiseOrValue<BigNumberish>,
@@ -413,6 +454,10 @@ export interface ButovskyNFT extends BaseContract {
     tokenId: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<string>;
+
+  getTokenCount(overrides?: CallOverrides): Promise<BigNumber>;
+
+  getTokenLimit(overrides?: CallOverrides): Promise<BigNumber>;
 
   isApprovedForAll(
     owner: PromiseOrValue<string>,
@@ -483,6 +528,11 @@ export interface ButovskyNFT extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    addLimit(
+      newLimit: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     approve(
       to: PromiseOrValue<string>,
       tokenId: PromiseOrValue<BigNumberish>,
@@ -505,6 +555,10 @@ export interface ButovskyNFT extends BaseContract {
       tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<string>;
+
+    getTokenCount(overrides?: CallOverrides): Promise<BigNumber>;
+
+    getTokenLimit(overrides?: CallOverrides): Promise<BigNumber>;
 
     isApprovedForAll(
       owner: PromiseOrValue<string>,
@@ -619,6 +673,11 @@ export interface ButovskyNFT extends BaseContract {
   };
 
   estimateGas: {
+    addLimit(
+      newLimit: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     approve(
       to: PromiseOrValue<string>,
       tokenId: PromiseOrValue<BigNumberish>,
@@ -641,6 +700,10 @@ export interface ButovskyNFT extends BaseContract {
       tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
+
+    getTokenCount(overrides?: CallOverrides): Promise<BigNumber>;
+
+    getTokenLimit(overrides?: CallOverrides): Promise<BigNumber>;
 
     isApprovedForAll(
       owner: PromiseOrValue<string>,
@@ -712,6 +775,11 @@ export interface ButovskyNFT extends BaseContract {
   };
 
   populateTransaction: {
+    addLimit(
+      newLimit: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     approve(
       to: PromiseOrValue<string>,
       tokenId: PromiseOrValue<BigNumberish>,
@@ -734,6 +802,10 @@ export interface ButovskyNFT extends BaseContract {
       tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
+
+    getTokenCount(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    getTokenLimit(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     isApprovedForAll(
       owner: PromiseOrValue<string>,

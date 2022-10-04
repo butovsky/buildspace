@@ -6,7 +6,6 @@ import { getContract } from "../../../utils/getContract";
 import { NFTModal } from "../../Modal/NFT";
 import { abi } from '../../../../contracts/abi/ButovskyNFT.json'
 import { ButovskyNFT } from "../../../../contracts/types";
-import { ENV } from "../../../utils/config";
 
 export const MintButovskyNFT: React.FC = () => {
     const { ethereum } = useMetaMask();
@@ -17,7 +16,7 @@ export const MintButovskyNFT: React.FC = () => {
 
     const mint = async() => {
         if (ethereum) {
-            const BNFTContract = getContract<ButovskyNFT>({ ethereum, abi, address: ENV('NEXT_PUBLIC_BUTOVSKY_NFT_CONTRACT') })
+            const BNFTContract = getContract<ButovskyNFT>({ ethereum, abi, address: process.env.NEXT_PUBLIC_BUTOVSKY_NFT_CONTRACT as string })
 
             setLoadingText('Setting MM...')
             setMinting(true);

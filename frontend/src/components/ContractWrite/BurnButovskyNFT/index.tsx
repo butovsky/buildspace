@@ -8,7 +8,6 @@ import { ethers } from 'ethers';
 
 import styles from './index.module.scss'
 import { useState } from "react";
-import { ENV } from "../../../utils/config";
 
 export const BurnButovskyNFT: React.FC = () => {
     const { ethereum } = useMetaMask();
@@ -18,7 +17,7 @@ export const BurnButovskyNFT: React.FC = () => {
 
     const burn = async() => {
         if (ethereum) {
-            const BNFTContract = getContract<ButovskyNFT>({ ethereum, abi, address: ENV('NEXT_PUBLIC_BUTOVSKY_NFT_CONTRACT') })
+            const BNFTContract = getContract<ButovskyNFT>({ ethereum, abi, address: process.env.NEXT_PUBLIC_BUTOVSKY_NFT_CONTRACT as string })
 
             setLoadingText("Setting MM...")
             setBurning(true)
