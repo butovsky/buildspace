@@ -1,8 +1,6 @@
-import { BasicProps } from "../types";
+export type InputProps = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 
-export type InputProps = BasicProps & {
-    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => any;
-    value: string;
-    name: string;
-    placeholder?: string;
+export enum NumberType {
+    float = "[0-9]+([\.][0-9]+)?",
+    int = "[0-9]+"
 }

@@ -26,6 +26,7 @@
 
 .container {
     @include buttonCommon;
+    height: 30px;
 
     .spinner {
         z-index: -1;

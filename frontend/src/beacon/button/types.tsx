@@ -1,9 +1,6 @@
-import { TextContainedProps } from "../types";
+import { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
 
-export type ButtonProps = TextContainedProps & {
-    onClick?: (e: React.MouseEvent<HTMLButtonElement>) => any;
-    height?: number;
-    width?: number;
+export type ButtonProps = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> & {
     isLoading?: boolean;
-    loadingText?: string;
+    loadingText?: string | null;
 } 

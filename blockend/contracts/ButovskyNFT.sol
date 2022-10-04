@@ -33,9 +33,9 @@ contract ButovskyNFT is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
     constructor() ERC721("Butovsky NFT", "BDT") {
     }
 
-
-    function addLimit(uint256 newLimit) public {
-        _limit = _limit.add(newLimit);
+    // 
+    function addLimit(uint256 _newLimit) public onlyOwner {
+        _limit = _limit.add(_newLimit);
     }
 
     function getTokenCount() public view returns (uint256) {

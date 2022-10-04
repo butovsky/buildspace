@@ -12,7 +12,7 @@ export const MintButovskyNFT: React.FC = () => {
     const { hasNFT, checkForNFT } = useButovskyNFT();
     const [ isOpen, setOpen ] = useState(false);
     const [ isMinting, setMinting ] = useState(false);
-    const [ loadingText, setLoadingText ] = useState('')
+    const [ loadingText, setLoadingText ] = useState<string | null>(null)
 
     const mint = async() => {
         if (ethereum) {
@@ -36,7 +36,7 @@ export const MintButovskyNFT: React.FC = () => {
 
     return (
         <>
-            <Button onClick={hasNFT ? () => setOpen(true) : mint } isLoading={isMinting} loadingText={loadingText}>{hasNFT ? 'Your NFT' : 'Mint an NFT'}</Button>
+            <Button onClick={hasNFT ? () => setOpen(true) : mint } disabled={isMinting} isLoading={isMinting} loadingText={loadingText}>{hasNFT ? 'Your NFT' : 'Mint an NFT'}</Button>
             <NFTModal isOpen={isOpen} close={() => setOpen(false)}/>
         </>
     )

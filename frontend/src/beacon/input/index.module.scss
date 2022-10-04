@@ -16,3 +16,7 @@
     border-color: rgb(226 232 240);
     outline: none;
 }
+
+.container:invalid {
+    border-color: rgb(156, 77, 77)
+}

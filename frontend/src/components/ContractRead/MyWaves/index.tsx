@@ -1,7 +1,7 @@
 import { useMetaMask } from 'metamask-react'
 import { useState, useEffect } from 'react';
 import { WavePortal } from '../../../../contracts/types';
-import WavePortalJson from '../../../../contracts/abi/WavePortal.json'
+import { abi } from '../../../../contracts/abi/WavePortal.json'
 import { BasicProps } from '../../../beacon/types';
 import { Button } from '../../../beacon/button';
 import { getContract } from '../../../utils/getContract';
@@ -19,7 +19,7 @@ export const MyWaves: React.FC<BasicProps> = (props) => {
 
   const fetchWaves = async() => {
     if (ethereum) {
-      const waveContract = getContract<WavePortal>({ ethereum, abi: WavePortalJson.abi, address: process.env.NEXT_PUBLIC_WAVES_CONTRACT as string})
+      const waveContract = getContract<WavePortal>({ ethereum, abi, address: process.env.NEXT_PUBLIC_WAVES_CONTRACT as string})
       const fetchedWaves = await waveContract.myWaves()
       setWaves(fetchedWaves)
     }

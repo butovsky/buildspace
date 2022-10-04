@@ -21,6 +21,9 @@ const Home: NextPage = () => {
           <Link href='/send'>
             <Button>Send a Wave</Button>
           </Link>
+          <Link href='/bounty'>
+            <Button>Bounty settings</Button>
+          </Link>
         </div>
       </MetaMasked>
     </main>

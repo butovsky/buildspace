@@ -13,7 +13,7 @@ export const BurnButovskyNFT: React.FC = () => {
     const { ethereum } = useMetaMask();
     const { checkForNFT, NFT } = useButovskyNFT();
     const [isBurning, setBurning] = useState(false)
-    const [loadingText, setLoadingText] = useState('')
+    const [loadingText, setLoadingText] = useState<string | null>(null)
 
     const burn = async() => {
         if (ethereum) {
@@ -37,6 +37,6 @@ export const BurnButovskyNFT: React.FC = () => {
     }
 
     return (
-        <Button isLoading={isBurning} loadingText={loadingText} className={styles.container} onClick={burn}>Burn this NFT!</Button>
+        <Button disabled={isBurning} isLoading={isBurning} loadingText={loadingText} className={styles.container} onClick={burn}>Burn this NFT!</Button>
     )
 }

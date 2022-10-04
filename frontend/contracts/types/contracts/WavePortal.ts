@@ -4,10 +4,12 @@
 import type {
   BaseContract,
   BigNumber,
+  BigNumberish,
   BytesLike,
   CallOverrides,
   ContractTransaction,
   Overrides,
+  PayableOverrides,
   PopulatedTransaction,
   Signer,
   utils,
@@ -40,31 +42,48 @@ export declare namespace WavePortal {
 
 export interface WavePortalInterface extends utils.Interface {
   functions: {
+    "fund()": FunctionFragment;
+    "getFunds()": FunctionFragment;
+    "getReward()": FunctionFragment;
     "myWaves()": FunctionFragment;
     "owner()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
+    "setReward(uint256)": FunctionFragment;
     "totalWaves()": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "wave(string,address)": FunctionFragment;
     "wavesCount()": FunctionFragment;
+    "withdraw()": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "fund"
+      | "getFunds"
+      | "getReward"
       | "myWaves"
       | "owner"
       | "renounceOwnership"
+      | "setReward"
       | "totalWaves"
       | "transferOwnership"
       | "wave"
       | "wavesCount"
+      | "withdraw"
   ): FunctionFragment;
 
+  encodeFunctionData(functionFragment: "fund", values?: undefined): string;
+  encodeFunctionData(functionFragment: "getFunds", values?: undefined): string;
+  encodeFunctionData(functionFragment: "getReward", values?: undefined): string;
   encodeFunctionData(functionFragment: "myWaves", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "renounceOwnership",
     values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setReward",
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "totalWaves",
@@ -82,13 +101,18 @@ export interface WavePortalInterface extends utils.Interface {
     functionFragment: "wavesCount",
     values?: undefined
   ): string;
+  encodeFunctionData(functionFragment: "withdraw", values?: undefined): string;
 
+  decodeFunctionResult(functionFragment: "fund", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getFunds", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getReward", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "myWaves", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "renounceOwnership",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "setReward", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "totalWaves", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "transferOwnership",
@@ -96,6 +120,7 @@ export interface WavePortalInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "wave", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "wavesCount", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "withdraw", data: BytesLike): Result;
 
   events: {
     "OwnershipTransferred(address,address)": EventFragment;
@@ -153,6 +178,14 @@ export interface WavePortal extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    fund(
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    getFunds(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    getReward(overrides?: CallOverrides): Promise<[BigNumber]>;
+
     myWaves(
       overrides?: CallOverrides
     ): Promise<[WavePortal.WaveStructOutput[]]>;
@@ -160,6 +193,11 @@ export interface WavePortal extends BaseContract {
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     renounceOwnership(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    setReward(
+      _newPrize: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -179,13 +217,30 @@ export interface WavePortal extends BaseContract {
     ): Promise<ContractTransaction>;
 
     wavesCount(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    withdraw(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
   };
+
+  fund(
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  getFunds(overrides?: CallOverrides): Promise<BigNumber>;
+
+  getReward(overrides?: CallOverrides): Promise<BigNumber>;
 
   myWaves(overrides?: CallOverrides): Promise<WavePortal.WaveStructOutput[]>;
 
   owner(overrides?: CallOverrides): Promise<string>;
 
   renounceOwnership(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  setReward(
+    _newPrize: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -204,12 +259,27 @@ export interface WavePortal extends BaseContract {
 
   wavesCount(overrides?: CallOverrides): Promise<BigNumber>;
 
+  withdraw(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   callStatic: {
+    fund(overrides?: CallOverrides): Promise<void>;
+
+    getFunds(overrides?: CallOverrides): Promise<BigNumber>;
+
+    getReward(overrides?: CallOverrides): Promise<BigNumber>;
+
     myWaves(overrides?: CallOverrides): Promise<WavePortal.WaveStructOutput[]>;
 
     owner(overrides?: CallOverrides): Promise<string>;
 
     renounceOwnership(overrides?: CallOverrides): Promise<void>;
+
+    setReward(
+      _newPrize: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     totalWaves(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -225,6 +295,8 @@ export interface WavePortal extends BaseContract {
     ): Promise<void>;
 
     wavesCount(overrides?: CallOverrides): Promise<BigNumber>;
+
+    withdraw(overrides?: CallOverrides): Promise<void>;
   };
 
   filters: {
@@ -242,11 +314,24 @@ export interface WavePortal extends BaseContract {
   };
 
   estimateGas: {
+    fund(
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    getFunds(overrides?: CallOverrides): Promise<BigNumber>;
+
+    getReward(overrides?: CallOverrides): Promise<BigNumber>;
+
     myWaves(overrides?: CallOverrides): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     renounceOwnership(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    setReward(
+      _newPrize: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -264,14 +349,31 @@ export interface WavePortal extends BaseContract {
     ): Promise<BigNumber>;
 
     wavesCount(overrides?: CallOverrides): Promise<BigNumber>;
+
+    withdraw(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
+    fund(
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    getFunds(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    getReward(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     myWaves(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     renounceOwnership(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setReward(
+      _newPrize: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -289,5 +391,9 @@ export interface WavePortal extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     wavesCount(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    withdraw(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
   };
 }
