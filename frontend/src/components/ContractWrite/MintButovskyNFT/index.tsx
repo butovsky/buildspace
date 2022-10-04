@@ -6,31 +6,38 @@ import { getContract } from "../../../utils/getContract";
 import { NFTModal } from "../../Modal/NFT";
 import { abi } from '../../../../contracts/abi/ButovskyNFT.json'
 import { ButovskyNFT } from "../../../../contracts/types";
+import { ENV } from "../../../utils/config";
 
 export const MintButovskyNFT: React.FC = () => {
     const { ethereum } = useMetaMask();
     const { hasNFT, checkForNFT } = useButovskyNFT();
     const [ isOpen, setOpen ] = useState(false);
     const [ isMinting, setMinting ] = useState(false);
+    const [ loadingText, setLoadingText ] = useState('')
 
     const mint = async() => {
         if (ethereum) {
-            const BNFTContract = getContract<ButovskyNFT>({ ethereum, abi, address: "0x4412D5db5703e84693A3004115C0C41eAE8c92fb" })
-            const mintTx = await BNFTContract.safeMint();
+            const BNFTContract = getContract<ButovskyNFT>({ ethereum, abi, address: ENV('NEXT_PUBLIC_BUTOVSKY_NFT_CONTRACT') })
+
+            setLoadingText('Setting MM...')
+            setMinting(true);
+
             try {
-                setMinting(true);
+                const mintTx = await BNFTContract.safeMint();
+                setLoadingText("Minting...")
                 await mintTx.wait();
                 await checkForNFT();
             } catch (e) {
                 alert(e);
             }
             setMinting(false);
+            setLoadingText('')
         }
     }
 
     return (
         <>
-            <Button onClick={hasNFT ? () => setOpen(true) : mint } isLoading={isMinting} loadingText='Minting...'>{hasNFT ? 'Your NFT' : 'Mint an NFT'}</Button>
+            <Button onClick={hasNFT ? () => setOpen(true) : mint } isLoading={isMinting} loadingText={loadingText}>{hasNFT ? 'Your NFT' : 'Mint an NFT'}</Button>
             <NFTModal isOpen={isOpen} close={() => setOpen(false)}/>
         </>
     )

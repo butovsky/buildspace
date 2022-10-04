@@ -1,4 +1,4 @@
-.container {
+@mixin buttonCommon {
     border: 1px solid;
     display: flex;
     align-items: center;
@@ -7,7 +7,7 @@
     border-color: rgb(148 163 184);
     color: white;
     box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-    border-radius: 6px;
+    border-radius: 12px;
     padding: 0px 8px;
 
     font-weight: 500;
@@ -16,10 +16,16 @@
     
     transition: all 0.3s ease-in-out;
 
-    -webkit-appearance: button;
     background-color: transparent;
     background-image: none;
-    cursor: pointer;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+}
+
+.container {
+    @include buttonCommon;
 
     .spinner {
         z-index: -1;
@@ -40,10 +46,6 @@
             transform: rotate(360deg);
         }
         } 
-}
-
-.container:hover {
-    transform: scale(1.05);
 }
 
 .container:disabled {

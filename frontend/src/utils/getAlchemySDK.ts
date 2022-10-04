@@ -1,12 +1,9 @@
 import { Network, Alchemy } from 'alchemy-sdk';
+import { ENV } from './config';
 
 export const getAlchemySDK = () => {
     return new Alchemy({
-        /*
-            this is a testnet API key anyway, won't bother for now
-            todo: make NEXT_PUBLIC env for this key (and for contract addresses), just for convenience
-        */
-        apiKey: "sTH9RLpHya2b-CvAQiYzFWoF_K3RXD2T",
+        apiKey: ENV('NEXT_PUBLIC_ALCHEMY_TESTNET_API_KEY'),
         network: Network.MATIC_MUMBAI
     })
 }

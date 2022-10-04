@@ -10,6 +10,7 @@ import { Text } from '../../../beacon/text';
 import Link from 'next/link';
 
 import styles from './index.module.scss';
+import { ENV } from '../../../utils/config';
 
 // there can be a room for a flexible component for not only my waves, but for any user's
 
@@ -19,7 +20,7 @@ export const MyWaves: React.FC<BasicProps> = (props) => {
 
   const fetchWaves = async() => {
     if (ethereum) {
-      const waveContract = getContract<WavePortal>({ ethereum, abi: WavePortalJson.abi, address: '0xbAB57b132CB35E2292A5ea7926314FC647EEc539'})
+      const waveContract = getContract<WavePortal>({ ethereum, abi: WavePortalJson.abi, address: ENV('NEXT_PUBLIC_WAVES_CONTRACT')})
       const fetchedWaves = await waveContract.myWaves()
       setWaves(fetchedWaves)
     }

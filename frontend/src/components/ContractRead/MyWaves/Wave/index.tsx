@@ -15,7 +15,7 @@ export const Wave: React.FC<WaveProps> = ({ from, message, className }) => {
     return (
         <Card className={`${styles.container} ${className}`}>
             <div className={styles.from}>
-                <a href={`https://mumbai.polygonscan.com/address/${from}`}>
+                <a target="_blank" rel="noopener noreferrer" href={`https://mumbai.polygonscan.com/address/${from}`}>
                     <Text className={styles.icon}>📄</Text>
                 </a>
                 <Text>{from}</Text>

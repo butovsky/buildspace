@@ -10,6 +10,7 @@ import { abi } from '../../../../contracts/abi/WavePortal.json'
 import { WavePortal } from "../../../../contracts/types";
 
 import styles from './index.module.scss';
+import { ENV } from "../../../utils/config";
 
 
 type SendProps = BasicProps & {
@@ -29,7 +30,7 @@ export const SendWave: React.FC<SendProps> = (props) => {
 
     const sendWaveToContract = async() => {
         if (ethereum) {
-            const waveContract = getContract<WavePortal>({ ethereum, abi, address: '0xbAB57b132CB35E2292A5ea7926314FC647EEc539'})
+            const waveContract = getContract<WavePortal>({ ethereum, abi, address: ENV('NEXT_PUBLIC_WAVES_CONTRACT')})
             const sendTx = await waveContract.wave(message, address);
             const result = await sendTx.wait()
             console.log(result)

@@ -1,12 +1,14 @@
 import { useMetaMask } from 'metamask-react';
 import Link from 'next/link';
 import { Text } from '../../beacon/text';
-import { TotalCount } from '../ContractRead/TotalCount';
 import { MetaMask } from "./MetaMask"
 import { useButovskyNFT } from '../../contexts/butovskyNFT';
 import { MintButovskyNFT } from '../ContractWrite/MintButovskyNFT';
 
 import styles from './index.module.scss';
+import { Select } from '../../beacon/select';
+import { TotalWaves } from './SelectInfo/TotalWaves';
+import { TotalMinted } from './SelectInfo/TotalMinted';
 
 export const Header: React.FC = () => {
     const { account } = useMetaMask();
@@ -22,7 +24,12 @@ export const Header: React.FC = () => {
                 </Link>
                 <div className={styles.menu}>
                     {account && <MintButovskyNFT/>}
-                    {account && hasNFT && <TotalCount/>}
+                    {account && hasNFT && 
+                        <Select>
+                            <TotalMinted/>
+                            <TotalWaves/>
+                        </Select>
+                    }
                     <MetaMask/>
                 </div>
             </div>

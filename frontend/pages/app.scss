@@ -23,6 +23,19 @@ textarea::placeholder {
   color: #9ca3af
 }
 
+button, select {
+  outline: none;
+  cursor: pointer;
+}
+
+button {
+  -webkit-appearance: button;
+}
+
+select {
+  -webkit-appearance: none;
+}
+
 
 .app {
     min-height: 100vh;

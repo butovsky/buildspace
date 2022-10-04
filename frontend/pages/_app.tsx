@@ -5,15 +5,15 @@ import { MetaMaskProvider } from "metamask-react";
 import './app.scss'
 
 import { Header } from '../src/components/Header';
-import { AlchemyProvider } from '../src/contexts/alchemy';
 import { ButovskyNFTProvider } from '../src/contexts/butovskyNFT';
 import { Footer } from '../src/components/Footer';
+import { EventsProvider } from '../src/contexts/events';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <AlchemyProvider>
-      <MetaMaskProvider>
-        <ButovskyNFTProvider>
+    <MetaMaskProvider>
+      <ButovskyNFTProvider>
+        <EventsProvider>
           <Head>
             <title>Buildspace Intro</title>
             <link rel="icon" href="/favicon.ico" />
@@ -23,9 +23,9 @@ function MyApp({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
           <Footer/>
           </div>
-        </ButovskyNFTProvider>
-      </MetaMaskProvider>
-    </AlchemyProvider>
+        </EventsProvider>
+      </ButovskyNFTProvider>
+    </MetaMaskProvider>
   )
 }
 

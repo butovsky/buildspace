@@ -40,6 +40,7 @@ export const MetaMask: React.FC = () => {
     <Button
         className={styles.container}
         onClick={handleConnect}
+        width={150}
     ><Text>{buttonText}</Text></Button>
   );
 }

@@ -1,8 +1,8 @@
-import { NftMetadata, OwnedNft } from "alchemy-sdk";
+import { OwnedNft } from "alchemy-sdk";
 import { useMetaMask } from "metamask-react";
 import React, { useContext, useEffect, useState } from "react";
+import { getAlchemySDK } from "../utils/getAlchemySDK";
 import networks from "../utils/networks";
-import { useAlchemy } from "./alchemy";
 import { CustomProviderProps } from "./types";
 
 type ButovskyNFTValues = {
@@ -14,7 +14,7 @@ type ButovskyNFTValues = {
 const ButovskyNFTContext = React.createContext<ButovskyNFTValues>({ hasNFT: false, checkForNFT: async () => {}, NFT: undefined });
 
 export const ButovskyNFTProvider = ({ children }: CustomProviderProps ): JSX.Element => {
-    const { alchemy } = useAlchemy();
+    const alchemy = getAlchemySDK();
     const { account, chainId } = useMetaMask();
 
     const [hasNFT, setHasNFT] = useState(false);
