@@ -15,7 +15,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <ButovskyNFTProvider>
         <EventsProvider>
           <Head>
-            <title>Buildspace NFT</title>
+            <title>Waves</title>
             <link rel="icon" href="/favicon.ico" />
           </Head>
           <div className='app'>
