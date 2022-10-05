@@ -22,6 +22,10 @@ export const MyWaves: React.FC<BasicProps> = (props) => {
       const waveContract = getContract<WavePortal>({ ethereum, abi, address: process.env.NEXT_PUBLIC_WAVES_CONTRACT as string})
       const fetchedWaves = await waveContract.myWaves()
       setWaves(fetchedWaves)
+
+      waveContract.on("UserWaved", () => {
+        fetchWaves()
+      })
     }
   }
 
