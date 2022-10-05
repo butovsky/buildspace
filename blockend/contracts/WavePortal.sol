@@ -10,6 +10,9 @@ contract WavePortal is Ownable {
     using SafeMath for uint256;
     using Counters for Counters.Counter;
     Counters.Counter public totalWaves;
+    Counters.Counter private _nonce;
+
+    uint256 public cooldownTime = 15 minutes;
 
     struct Wave {
         address from;
@@ -19,10 +22,12 @@ contract WavePortal is Ownable {
     struct WaveFund {
         uint256 reward;
         uint256 total;
+        uint256 chance;
     }
 
     mapping(address => Wave[]) wavesByUser;
     mapping(address => WaveFund) private _fundByUser;
+    mapping(address => uint256) private _cooldownByUser;
 
     event UserWaved(address from, address to);
 
@@ -30,18 +35,34 @@ contract WavePortal is Ownable {
 
     function setReward(uint256 _newPrize) public {
         _fundByUser[msg.sender].reward = _newPrize;
+        if (_fundByUser[msg.sender].chance == 0) {
+            _fundByUser[msg.sender].chance = 50;
+        }
     }
 
     function getReward() public view returns (uint256) {
         return _fundByUser[msg.sender].reward;
     }
 
+    function fund() public payable {
+        _fundByUser[msg.sender].total = _fundByUser[msg.sender].total.add(msg.value);
+    }
+
     function getFunds() public view returns (uint256) {
         return _fundByUser[msg.sender].total;
     }
 
-    function fund() public payable {
-        _fundByUser[msg.sender].total = _fundByUser[msg.sender].total.add(msg.value);
+    function setChance(uint256 _newChance) public {
+        require(_newChance <= 100 && _newChance > 0, "The number must be <= 100 and > 0");
+        _fundByUser[msg.sender].chance = _newChance;
+    }
+
+    function getChance() public view returns (uint256) {
+        return _fundByUser[msg.sender].chance;
+    }
+
+    function setCooldownTime(uint256 _newCooldown) public onlyOwner {
+        cooldownTime = _newCooldown;
     }
 
     function withdraw() public {
@@ -52,13 +73,18 @@ contract WavePortal is Ownable {
     }
 
     function wave(string memory _message, address _to) public {
+        require(
+            _cooldownByUser[msg.sender] == 0 || _cooldownByUser[msg.sender] <= block.timestamp,
+            'You must wait for the cooldown!'
+        );
+
         totalWaves.increment();
 
         Wave memory newWave = Wave({ from: msg.sender, message: _message });
 
         WaveFund memory _fund = _fundByUser[_to];
 
-        if (_fund.reward > 0) {
+        if (_fund.reward > 0 && pseudoRandom(101) <= _fund.chance) {
             require(
                 (
                     _fund.reward <= address(this).balance
@@ -75,6 +101,12 @@ contract WavePortal is Ownable {
         wavesByUser[_to].push(newWave);
 
         emit UserWaved(msg.sender, _to);
+
+        _cooldownByUser[msg.sender] = block.timestamp + cooldownTime;
+    }
+
+    function userCooldown() public view returns (uint256) {
+        return _cooldownByUser[msg.sender];
     }
 
     function wavesCount() public view returns (uint256) {
@@ -83,5 +115,12 @@ contract WavePortal is Ownable {
 
     function myWaves() public view returns (Wave[] memory) {
         return wavesByUser[msg.sender];
+    }
+
+
+    function pseudoRandom(uint max) internal returns (uint256) {
+        uint256 random = uint256(keccak256(abi.encodePacked(block.timestamp, msg.sender, _nonce.current()))) % max;
+        _nonce.increment();
+        return random;
     }
 }

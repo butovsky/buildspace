@@ -11,31 +11,31 @@ import { getContract } from "../../../../../utils/getContract";
 
 import styles from '../form.module.scss';
 
-export const WaveBountyFormReward: React.FC<BasicProps> = (props) => {
+export const WaveBountyFormChance: React.FC<BasicProps> = (props) => {
     const { ethereum } = useMetaMask();
     
-    const [reward, setReward] = useState('');
+    const [chance, setChance] = useState('');
     const [isDisabled, setDisabled] = useState(false);
 
-    const [isPutting, setPutting] = useState(false)
+    const [isUpdating, setUpdating] = useState(false)
     const [loadingText, setLoadingText] = useState<string | null>(null);
 
-    const putRewards = async () => {
+    const updateChances = async () => {
         if (ethereum) {
             const waveContract = getContract<WavePortal>({ ethereum, abi, address: process.env.NEXT_PUBLIC_WAVES_CONTRACT as string})
 
             setLoadingText("Setting MM...")
-            setPutting(true)
+            setUpdating(true)
 
             try {
-                const sendTx = await waveContract.setReward(ethers.utils.parseEther(reward || '0'))
-                setLoadingText("Putting...")
+                const sendTx = await waveContract.setChance(ethers.BigNumber.from(chance || '0'))
+                setLoadingText("Updating...")
                 await sendTx.wait()
             } catch (e) {
                 alert(e);
             }
 
-            setPutting(false)
+            setUpdating(false)
             setLoadingText('')
         }
     }
@@ -44,18 +44,18 @@ export const WaveBountyFormReward: React.FC<BasicProps> = (props) => {
         <div className={styles.container}>
             <Button
                 className={styles.button}
-                disabled={isDisabled || isPutting}
-                isLoading={isPutting}
+                disabled={isDisabled || isUpdating}
+                isLoading={isUpdating}
                 loadingText={loadingText}
-                onClick={putRewards}
-            >Put a reward</Button>
+                onClick={updateChances}
+            >Update a chance</Button>
             <NumberInput
                 className={styles.input}
-                value={reward}
-                name='reward'
-                onChange={(e) => setInputValue(e, setReward, setDisabled)}
-                placeholder='Value in ETH'
-                step="0,000000000000000001"
+                value={chance}
+                name='chance'
+                onChange={(e) => setInputValue(e, setChance, setDisabled)}
+                placeholder='Value in % (1 to 100)'
+                pattern="^([1-9][0-9]?|100)$"
             />
         </div>
     )

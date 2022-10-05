@@ -53,9 +53,7 @@ export const WaveBountyFormFund: React.FC<BasicProps> = (props) => {
                 value={fund}
                 name='fund'
                 onChange={(e) => setInputValue(e, setFund, setDisabled)}
-                placeholder='Fund value in ETH'
-                step="0,000000000000000001"
-                numType="float"
+                placeholder='Value in ETH'
             />
         </div>
     )

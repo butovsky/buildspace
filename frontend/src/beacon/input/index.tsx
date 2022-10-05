@@ -1,5 +1,5 @@
 import React from "react";
-import { InputProps, NumberType } from "./types";
+import { InputProps } from "./types";
 
 import styles from './index.module.scss'
 
@@ -13,7 +13,7 @@ export const Input: React.FC<InputProps> = (props) => {
     )
 }
 
-export const NumberInput: React.FC<InputProps & { numType: keyof typeof NumberType }> = (props) => {
+export const NumberInput: React.FC<InputProps> = (props) => {
     const specials = ["+", "-", ",", "e"]
 
     const blockSpecialsKey = (e: any) => {
@@ -35,7 +35,7 @@ export const NumberInput: React.FC<InputProps & { numType: keyof typeof NumberTy
     return (
         <Input
             {...props}
-            pattern={NumberType[props.numType]}
+            pattern={props.pattern || "[0-9]+([\.][0-9]+)?"}
             onKeyDown={blockSpecialsKey}
             onPaste={blockSpecialsPaste}
         />

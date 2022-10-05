@@ -5,6 +5,7 @@ import { WaveBountyFormFund } from "./Fund";
 
 import styles from './index.module.scss';
 import { WaveBountyFormReward } from "./Reward";
+import { WaveBountyFormChance } from "./Chance";
 
 export const WaveBountyForm: React.FC<BasicProps> = (props) => {
 
@@ -12,6 +13,7 @@ export const WaveBountyForm: React.FC<BasicProps> = (props) => {
         <div className={styles.container}>
             <WaveBountyFormReward/>
             <WaveBountyFormFund/>
+            <WaveBountyFormChance/>
             <WaveBountyWithdraw/>
         </div>
     )

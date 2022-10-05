@@ -14,6 +14,7 @@ export const WaveBountyInfo: React.FC<BasicProps> = (props) => {
     const { ethereum } = useMetaMask()
     const [reward, setReward] = useState('0');
     const [fund, setFund] = useState('0');
+    const [chance, setChance] = useState('0');
 
     const fetchRewardAndFund = async () => {
         if (ethereum) {
@@ -25,6 +26,9 @@ export const WaveBountyInfo: React.FC<BasicProps> = (props) => {
 
                 const fetchedFunds = await waveContract.getFunds();
                 setFund(ethers.utils.formatEther(fetchedFunds));
+
+                const fetchedChance = await waveContract.getChance();
+                setChance(fetchedChance.toNumber().toString());
             } catch (e) {
                 alert(e);
             }
@@ -48,6 +52,12 @@ export const WaveBountyInfo: React.FC<BasicProps> = (props) => {
                     Your funds
                 </Text>
                 <Text className={styles.data}>{`${fund} ETH`}</Text>
+            </div>
+            <div className={styles.section}>
+                <Text className={styles.title}>
+                    Your chance
+                </Text>
+                <Text className={styles.data}>{`${chance} %`}</Text>
             </div>
         </Card>
     )

@@ -42,15 +42,20 @@ export declare namespace WavePortal {
 
 export interface WavePortalInterface extends utils.Interface {
   functions: {
+    "cooldownTime()": FunctionFragment;
     "fund()": FunctionFragment;
+    "getChance()": FunctionFragment;
     "getFunds()": FunctionFragment;
     "getReward()": FunctionFragment;
     "myWaves()": FunctionFragment;
     "owner()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
+    "setChance(uint256)": FunctionFragment;
+    "setCooldownTime(uint256)": FunctionFragment;
     "setReward(uint256)": FunctionFragment;
     "totalWaves()": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
+    "userCooldown()": FunctionFragment;
     "wave(string,address)": FunctionFragment;
     "wavesCount()": FunctionFragment;
     "withdraw()": FunctionFragment;
@@ -58,21 +63,31 @@ export interface WavePortalInterface extends utils.Interface {
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "cooldownTime"
       | "fund"
+      | "getChance"
       | "getFunds"
       | "getReward"
       | "myWaves"
       | "owner"
       | "renounceOwnership"
+      | "setChance"
+      | "setCooldownTime"
       | "setReward"
       | "totalWaves"
       | "transferOwnership"
+      | "userCooldown"
       | "wave"
       | "wavesCount"
       | "withdraw"
   ): FunctionFragment;
 
+  encodeFunctionData(
+    functionFragment: "cooldownTime",
+    values?: undefined
+  ): string;
   encodeFunctionData(functionFragment: "fund", values?: undefined): string;
+  encodeFunctionData(functionFragment: "getChance", values?: undefined): string;
   encodeFunctionData(functionFragment: "getFunds", values?: undefined): string;
   encodeFunctionData(functionFragment: "getReward", values?: undefined): string;
   encodeFunctionData(functionFragment: "myWaves", values?: undefined): string;
@@ -80,6 +95,14 @@ export interface WavePortalInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "renounceOwnership",
     values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setChance",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setCooldownTime",
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "setReward",
@@ -94,6 +117,10 @@ export interface WavePortalInterface extends utils.Interface {
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
+    functionFragment: "userCooldown",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "wave",
     values: [PromiseOrValue<string>, PromiseOrValue<string>]
   ): string;
@@ -103,7 +130,12 @@ export interface WavePortalInterface extends utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "withdraw", values?: undefined): string;
 
+  decodeFunctionResult(
+    functionFragment: "cooldownTime",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "fund", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getChance", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "getFunds", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "getReward", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "myWaves", data: BytesLike): Result;
@@ -112,10 +144,19 @@ export interface WavePortalInterface extends utils.Interface {
     functionFragment: "renounceOwnership",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "setChance", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "setCooldownTime",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "setReward", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "totalWaves", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "transferOwnership",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "userCooldown",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "wave", data: BytesLike): Result;
@@ -178,9 +219,13 @@ export interface WavePortal extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    cooldownTime(overrides?: CallOverrides): Promise<[BigNumber]>;
+
     fund(
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    getChance(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     getFunds(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -193,6 +238,16 @@ export interface WavePortal extends BaseContract {
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     renounceOwnership(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    setChance(
+      _newChance: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    setCooldownTime(
+      _newCooldown: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -210,6 +265,8 @@ export interface WavePortal extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    userCooldown(overrides?: CallOverrides): Promise<[BigNumber]>;
+
     wave(
       _message: PromiseOrValue<string>,
       _to: PromiseOrValue<string>,
@@ -223,9 +280,13 @@ export interface WavePortal extends BaseContract {
     ): Promise<ContractTransaction>;
   };
 
+  cooldownTime(overrides?: CallOverrides): Promise<BigNumber>;
+
   fund(
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
+
+  getChance(overrides?: CallOverrides): Promise<BigNumber>;
 
   getFunds(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -236,6 +297,16 @@ export interface WavePortal extends BaseContract {
   owner(overrides?: CallOverrides): Promise<string>;
 
   renounceOwnership(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  setChance(
+    _newChance: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  setCooldownTime(
+    _newCooldown: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -251,6 +322,8 @@ export interface WavePortal extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  userCooldown(overrides?: CallOverrides): Promise<BigNumber>;
+
   wave(
     _message: PromiseOrValue<string>,
     _to: PromiseOrValue<string>,
@@ -264,7 +337,11 @@ export interface WavePortal extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    cooldownTime(overrides?: CallOverrides): Promise<BigNumber>;
+
     fund(overrides?: CallOverrides): Promise<void>;
+
+    getChance(overrides?: CallOverrides): Promise<BigNumber>;
 
     getFunds(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -275,6 +352,16 @@ export interface WavePortal extends BaseContract {
     owner(overrides?: CallOverrides): Promise<string>;
 
     renounceOwnership(overrides?: CallOverrides): Promise<void>;
+
+    setChance(
+      _newChance: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    setCooldownTime(
+      _newCooldown: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     setReward(
       _newPrize: PromiseOrValue<BigNumberish>,
@@ -287,6 +374,8 @@ export interface WavePortal extends BaseContract {
       newOwner: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    userCooldown(overrides?: CallOverrides): Promise<BigNumber>;
 
     wave(
       _message: PromiseOrValue<string>,
@@ -314,9 +403,13 @@ export interface WavePortal extends BaseContract {
   };
 
   estimateGas: {
+    cooldownTime(overrides?: CallOverrides): Promise<BigNumber>;
+
     fund(
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
+
+    getChance(overrides?: CallOverrides): Promise<BigNumber>;
 
     getFunds(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -327,6 +420,16 @@ export interface WavePortal extends BaseContract {
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     renounceOwnership(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    setChance(
+      _newChance: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    setCooldownTime(
+      _newCooldown: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -342,6 +445,8 @@ export interface WavePortal extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    userCooldown(overrides?: CallOverrides): Promise<BigNumber>;
+
     wave(
       _message: PromiseOrValue<string>,
       _to: PromiseOrValue<string>,
@@ -356,9 +461,13 @@ export interface WavePortal extends BaseContract {
   };
 
   populateTransaction: {
+    cooldownTime(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     fund(
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
+
+    getChance(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     getFunds(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -369,6 +478,16 @@ export interface WavePortal extends BaseContract {
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     renounceOwnership(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setChance(
+      _newChance: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setCooldownTime(
+      _newCooldown: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -383,6 +502,8 @@ export interface WavePortal extends BaseContract {
       newOwner: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
+
+    userCooldown(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     wave(
       _message: PromiseOrValue<string>,

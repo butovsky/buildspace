@@ -33,6 +33,7 @@ export const WaveBountyWithdraw: React.FC<BasicProps> = (props) => {
     }
     return (
         <Button
+            disabled={isWithdrawing}
             className={styles.container}
             isLoading={isWithdrawing}
             loadingText={loadingText}
